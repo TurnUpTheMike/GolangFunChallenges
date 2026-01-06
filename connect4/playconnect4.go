@@ -1,9 +1,9 @@
 package main
 
 import (
-	"fmt"
 	"connect4/game"
 	"flag"
+	"fmt"
 )
 
 func main() {

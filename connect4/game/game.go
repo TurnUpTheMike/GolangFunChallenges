@@ -39,7 +39,7 @@ func PlayConnect4(config GameConfig) (int, string) {
 	players := [NumPlayers]PlayerStrategy{player1, player2}
 
 	winner := NoPlayer
-	
+
 	turn := 0
 	for turn = range BoardWidth * BoardHeight {
 		whosTurn := turn % NumPlayers
