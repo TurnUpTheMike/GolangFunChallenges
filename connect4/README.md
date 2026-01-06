@@ -3,19 +3,19 @@
 Here's how to play
 
 Create a pull request to this repo that contains
-- A new file called player_strategy_<strategy_name>.go
-- Modify game.go func GetPlayerStrategy to call your code's constructor and return a PlayerStrategy
+- A new file called `player_strategy_<strategy_name>.go`
+- Modify `game.go` func GetPlayerStrategy to call your code's constructor and return a PlayerStrategy
 
-Your code in player_strategy_<strategy_name>.go should implement the functions of the Interfrace PlayerStrategy found in player_strategy.go.
+Your code in `player_strategy_<strategy_name>.go` should implement the functions of the Interfrace PlayerStrategy found in `player_strategy.go`.
 
 Your code should also contain a function NewPlayerStrategy<strategy_name> that returns your implementation of PlayerStrategy.
 
 # Example Usage
 
-Running with defaults
+Running with defaults <br/>
 `go run .`
 
-Selecting a specific PlayerStrategy
+Selecting a specific PlayerStrategy <br/>
 `go run . --player1 random --player2 firstavailable`
 
 ```
@@ -31,5 +31,5 @@ go run . --help
 
 # Running Tests
 
-This repository uses golang's standard test runner
+This repository uses golang's standard test runner <br/>
 `go test -v`
