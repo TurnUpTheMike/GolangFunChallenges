@@ -9,8 +9,8 @@ import (
 func main() {
 	fmt.Println("Let's Play Connect 4")
 
-	argPlayer1 := flag.String("player1", "firstavailable", "The Player Strategy key for Player 1")
-	argPlayer2 := flag.String("player2", "firstavailable", "The Player Strategy key for Player 2")
+	argPlayer1 := flag.String("player1", "random", "The Player Strategy key for Player 1")
+	argPlayer2 := flag.String("player2", "random", "The Player Strategy key for Player 2")
 	argPrintBoardCadence := flag.Int("printboard", 5, "Print the board to the display every n turns")
 	flag.Parse()
 
