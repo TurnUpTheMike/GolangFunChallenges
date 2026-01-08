@@ -90,6 +90,8 @@ func GetPlayerStrategy(option string, playerValue int) PlayerStrategy {
 		return NewPlayerStrategyRandom(playerValue)
 	case "firstavailable":
 		return NewPlayerStrategyFirstAvailableMove(playerValue)
+	case "blocker":
+		return NewPlayerStrategyBlocker(playerValue)
 	}
 
 	// default
