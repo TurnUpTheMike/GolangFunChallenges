@@ -32,7 +32,7 @@ func TestBlockerThreeInARow(t *testing.T) {
 		{-1, 99, me, me, -1, -1, -1},
 	}
 
-	board := GameBoard{board: TransposeMatrix(textBoard)}
+	board := NewGameBoardState(textBoard)
 	chosenColumn := player.PlayerChoosesAMove(board)
 
 	// we should be seeing the block here!
