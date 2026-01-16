@@ -48,6 +48,10 @@ func NewGameBoardState(matrix [BoardHeight][BoardWidth]int) *GameBoard {
 }
 
 func NewDynamicGameState(matrix [][]int) (*GameBoard, error) {
+	// [x][y] board coordinates, the value is player ownership
+	//
+	// This constructor allows the caller to set the gameboard using either
+	// a [BoardWidth][BoardHeight] or [BoardHeight][BoardWidth] array
 	if len(matrix) == BoardWidth && len(matrix[0]) == BoardHeight {
 		var fixedSizeMatrix [BoardWidth][BoardHeight]int
 		for i := 0; i < len(matrix); i++ {

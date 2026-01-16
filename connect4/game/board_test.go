@@ -31,12 +31,12 @@ func TestAvailableRowOnPartiallyFullRow(t *testing.T) {
 	availableRow := gameBoard.AvailableRow(0)
 
 	if availableRow != 1 {
-		t.Errorf(`TestAvailableRowOnEmptyBoard expected to return bottom row but returned %v instead`, availableRow)
+		t.Errorf(`TestAvailableRowOnPartiallyFullRow expected to return bottom row but returned %v instead`, availableRow)
 	}
 }
 
 func TestAvailableRowOnFullRow(t *testing.T) {
-	thisBoard := [BoardHeight][BoardWidth]int{
+	thisBoard := [][]int{
 		{1, -1, -1, -1, -1, -1, -1},
 		{1, -1, -1, -1, -1, -1, -1},
 		{0, -1, -1, -1, -1, -1, -1},
@@ -45,12 +45,16 @@ func TestAvailableRowOnFullRow(t *testing.T) {
 		{1, -1, -1, -1, -1, -1, -1},
 	}
 
-	gameBoard := NewGameBoardState(thisBoard)
+	gameBoard, ok := NewDynamicGameState(thisBoard)
+
+	if ok != nil {
+		t.Errorf(`TestAvailableRowOnFullRow %v`, ok.Error())
+	}
 
 	availableRow := gameBoard.AvailableRow(0)
 
 	if availableRow != StatusRowIsFull {
-		t.Errorf(`TestAvailableRowOnEmptyBoard expected to return bottom row but returned %v instead`, availableRow)
+		t.Errorf(`TestAvailableRowOnFullRow expected to return bottom row but returned %v instead`, availableRow)
 	}
 }
 
