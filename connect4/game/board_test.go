@@ -26,17 +26,17 @@ func TestAvailableRowOnPartiallyFullRow(t *testing.T) {
 		{2, -1, -1, -1, -1, -1, -1},
 	}
 
-	gameBoard := GameBoard{board: TransposeMatrix(thisBoard)}
+	gameBoard := NewGameBoardState(thisBoard)
 
 	availableRow := gameBoard.AvailableRow(0)
 
 	if availableRow != 1 {
-		t.Errorf(`TestAvailableRowOnEmptyBoard expected to return bottom row but returned %v instead`, availableRow)
+		t.Errorf(`TestAvailableRowOnPartiallyFullRow expected to return bottom row but returned %v instead`, availableRow)
 	}
 }
 
 func TestAvailableRowOnFullRow(t *testing.T) {
-	thisBoard := [BoardHeight][BoardWidth]int{
+	thisBoard := [][]int{
 		{1, -1, -1, -1, -1, -1, -1},
 		{1, -1, -1, -1, -1, -1, -1},
 		{0, -1, -1, -1, -1, -1, -1},
@@ -45,12 +45,16 @@ func TestAvailableRowOnFullRow(t *testing.T) {
 		{1, -1, -1, -1, -1, -1, -1},
 	}
 
-	gameBoard := GameBoard{board: TransposeMatrix(thisBoard)}
+	gameBoard, ok := NewDynamicGameState(thisBoard)
+
+	if ok != nil {
+		t.Errorf(`TestAvailableRowOnFullRow %v`, ok.Error())
+	}
 
 	availableRow := gameBoard.AvailableRow(0)
 
 	if availableRow != StatusRowIsFull {
-		t.Errorf(`TestAvailableRowOnEmptyBoard expected to return bottom row but returned %v instead`, availableRow)
+		t.Errorf(`TestAvailableRowOnFullRow expected to return bottom row but returned %v instead`, availableRow)
 	}
 }
 
@@ -77,7 +81,7 @@ func TestGetSpaceOwnershipOnPartiallyPlayedBoard(t *testing.T) {
 		{2, -1, -1, -1, -1, -1, -1},
 	}
 
-	gameBoard := GameBoard{board: TransposeMatrix(thisBoard)}
+	gameBoard := NewGameBoardState(thisBoard)
 
 	playerValue := gameBoard.GetSpaceOwnership(0, BoardHeight-1)
 	if playerValue != 2 {
@@ -154,7 +158,7 @@ func TestIsPlayersSpaceOnPartiallyPlayedBoard(t *testing.T) {
 		{2, -1, -1, -1, -1, -1, -1},
 	}
 
-	gameBoard := GameBoard{board: TransposeMatrix(thisBoard)}
+	gameBoard := NewGameBoardState(thisBoard)
 
 	player := NewPlayerStrategyFirstAvailableMove(1)
 
@@ -174,7 +178,7 @@ func TestIsHorizontalVictoryBecauseMatchIsOnBottomRow(t *testing.T) {
 		{2, 2, 2, 2, 2, 1, -1},
 	}
 
-	gameBoard := GameBoard{board: TransposeMatrix(thisBoard)}
+	gameBoard := NewGameBoardState(thisBoard)
 
 	winner := gameBoard.IsHorizontalVictory()
 
@@ -193,7 +197,7 @@ func TestIsHorizontalVictoryBecauseMatchIsOn2ndBottomRow(t *testing.T) {
 		{2, 2, 2, 1, 2, 1, -1},
 	}
 
-	gameBoard := GameBoard{board: TransposeMatrix(thisBoard)}
+	gameBoard := NewGameBoardState(thisBoard)
 
 	winner := gameBoard.IsHorizontalVictory()
 
@@ -212,7 +216,7 @@ func TestIsVerticalVictoryBecauseMatchIsVertical(t *testing.T) {
 		{2, 2, -1, 1, -1, -1, -1},
 	}
 
-	gameBoard := GameBoard{board: TransposeMatrix(thisBoard)}
+	gameBoard := NewGameBoardState(thisBoard)
 
 	winner := gameBoard.IsVerticalVictory()
 
@@ -231,7 +235,7 @@ func TestIsDiagonalVictoryBecauseMatchIsDownLeftAndNotOnBottom(t *testing.T) {
 		{1, 2, 2, 1, -1, -1, -1},
 	}
 
-	gameBoard := GameBoard{board: TransposeMatrix(thisBoard)}
+	gameBoard := NewGameBoardState(thisBoard)
 
 	winner := gameBoard.IsDiagonalVictory()
 
@@ -250,7 +254,7 @@ func TestIsDiagonalVictoryBecauseMatchIsDownLeftAndOnBottom(t *testing.T) {
 		{-1, -1, -1, 1, 2, 1, 2},
 	}
 
-	gameBoard := GameBoard{board: TransposeMatrix(thisBoard)}
+	gameBoard := NewGameBoardState(thisBoard)
 
 	winner := gameBoard.IsDiagonalVictory()
 
@@ -269,7 +273,7 @@ func TestIsDiagonalVictoryBecauseMatchIsDownRight(t *testing.T) {
 		{-1, -1, 2, 2, 2, 1, -1},
 	}
 
-	gameBoard := GameBoard{board: TransposeMatrix(thisBoard)}
+	gameBoard := NewGameBoardState(thisBoard)
 
 	winner := gameBoard.IsDiagonalVictory()
 
@@ -288,7 +292,7 @@ func TestIsDiagonalVictoryIsNoPlayer(t *testing.T) {
 		{2, 1, 2, 2, 2, 1, -1},
 	}
 
-	gameBoard := GameBoard{board: TransposeMatrix(thisBoard)}
+	gameBoard := NewGameBoardState(thisBoard)
 
 	winner := gameBoard.IsDiagonalVictoryDownRightLane(0, 0)
 
@@ -307,7 +311,7 @@ func TestPlayPieceOnFullBoard(t *testing.T) {
 		{2, 1, 2, 1, 2, 1, 2},
 	}
 
-	gameBoard := GameBoard{board: TransposeMatrix(thisBoard)}
+	gameBoard := NewGameBoardState(thisBoard)
 
 	err := gameBoard.PlayPiece(0, 3)
 	if err == nil {

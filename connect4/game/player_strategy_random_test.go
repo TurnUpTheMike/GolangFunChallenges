@@ -26,7 +26,7 @@ func TestRandomPlayerChoosesAMoveOnFullBoard(t *testing.T) {
 		{1, 2, 1, 2, 1, 2, 1},
 		{1, 2, 1, 2, 1, 2, 1},
 	}
-	gameBoard := GameBoard{board: TransposeMatrix(thisBoard)}
+	gameBoard := NewGameBoardState(thisBoard)
 
 	chosenColumn := player.PlayerChoosesAMove(gameBoard)
 
