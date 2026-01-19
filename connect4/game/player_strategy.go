@@ -12,10 +12,8 @@ type PlayerStrategy interface {
 	GetPlayerValue() int
 }
 
-// playerRegistry is the central map storing constructors/factories.
-type PlayerStrategyFactory func(ownershipValue int) PlayerStrategy
-
-var playerRegistry = make(map[string]PlayerStrategyFactory)
+type PlayerStrategyFactory func(ownershipValue int) PlayerStrategy // this is what PlayerStrategy constructors should look like
+var playerRegistry = make(map[string]PlayerStrategyFactory)        // playerRegistry is the central map storing constructors/factories.
 var registryMutex sync.RWMutex
 
 // Register adds a new PlayerStrategy constructor to the registry.
@@ -29,7 +27,7 @@ func Register(optionName string, constructor PlayerStrategyFactory) {
 	playerRegistry[optionName] = constructor
 }
 
-// Get retrieves a PlayerStrategy instance by name.
+// GetRegisteredPlayerStrategy retrieves a PlayerStrategy instance by name.
 func GetRegisteredPlayerStrategy(name string, playerValue int) PlayerStrategy {
 	registryMutex.RLock()
 	defer registryMutex.RUnlock()
