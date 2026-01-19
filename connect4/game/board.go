@@ -40,6 +40,13 @@ func NewGameBoard() *GameBoard {
 	return &GameBoard{board: gameBoard, turnHistory: []RecordedTurn{}}
 }
 
+func NewInProgressGameBoard(matrix [BoardHeight][BoardWidth]int) *GameBoard {
+	// [x][y] board coordinates, the value is player ownership
+	//
+	// For testing readability, it is easier to visually read a transposed matrix
+	return &GameBoard{board: TransposeMatrix(matrix), turnHistory: []RecordedTurn{}}
+}
+
 func TransposeMatrix(matrix [BoardHeight][BoardWidth]int) [BoardWidth][BoardHeight]int {
 	// This function is used to help visualize the board in code
 	// Pass the resulting Transposed Matrix to the constructor of the GameBoard

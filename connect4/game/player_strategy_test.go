@@ -28,7 +28,7 @@ func TestPlayerChoosesAMoveOnFullMiddleRow(t *testing.T) {
 		{-1, -1, -1, 0, -1, -1, -1},
 	}
 
-	gameBoard := GameBoard{board: TransposeMatrix(thisBoard)}
+	gameBoard := NewInProgressGameBoard(thisBoard)
 	leftOfMiddleColumn := (BoardWidth / 2) - 1
 
 	chosenColumn := player.PlayerChoosesAMove(gameBoard)
@@ -49,7 +49,7 @@ func TestPlayerChoosesAMoveOnFullBoard(t *testing.T) {
 		{1, 0, 1, 0, 1, 0, 1},
 		{1, 0, 1, 0, 1, 0, 1},
 	}
-	gameBoard := GameBoard{board: TransposeMatrix(thisBoard)}
+	gameBoard := NewInProgressGameBoard(thisBoard)
 
 	chosenColumn := player.PlayerChoosesAMove(gameBoard)
 
