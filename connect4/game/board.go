@@ -40,37 +40,11 @@ func NewGameBoard() *GameBoard {
 	return &GameBoard{board: gameBoard, turnHistory: []RecordedTurn{}}
 }
 
-func NewGameBoardState(matrix [BoardHeight][BoardWidth]int) *GameBoard {
+func NewInProgressGameBoard(matrix [BoardHeight][BoardWidth]int) *GameBoard {
 	// [x][y] board coordinates, the value is player ownership
 	//
 	// For testing readability, it is easier to visually read a transposed matrix
 	return &GameBoard{board: TransposeMatrix(matrix), turnHistory: []RecordedTurn{}}
-}
-
-func NewDynamicGameState(matrix [][]int) (*GameBoard, error) {
-	// [x][y] board coordinates, the value is player ownership
-	//
-	// This constructor allows the caller to set the gameboard using either
-	// a [BoardWidth][BoardHeight] or [BoardHeight][BoardWidth] array
-	if len(matrix) == BoardWidth && len(matrix[0]) == BoardHeight {
-		var fixedSizeMatrix [BoardWidth][BoardHeight]int
-		for i := 0; i < len(matrix); i++ {
-			copy(fixedSizeMatrix[i][:], matrix[i])
-		}
-
-		return &GameBoard{board: fixedSizeMatrix, turnHistory: []RecordedTurn{}}, nil
-	}
-
-	if len(matrix) == BoardHeight && len(matrix[0]) == BoardWidth {
-		var fixedSizeMatrix [BoardHeight][BoardWidth]int
-		for i := 0; i < len(matrix); i++ {
-			copy(fixedSizeMatrix[i][:], matrix[i])
-		}
-
-		return &GameBoard{board: TransposeMatrix(fixedSizeMatrix), turnHistory: []RecordedTurn{}}, nil
-	}
-
-	return nil, errors.New("The input must either be [BoardHeight][BoardWidth]int or [BoardWidth][BoardHeight]int")
 }
 
 func TransposeMatrix(matrix [BoardHeight][BoardWidth]int) [BoardWidth][BoardHeight]int {
