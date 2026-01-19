@@ -5,7 +5,7 @@ import (
 )
 
 func TestPlayerChoosesAMoveOnEmptyBoard(t *testing.T) {
-	player := NewPlayerStrategyFirstAvailableMove(0)
+	player := NewPlayerStrategyFirstAvailableMove(1)
 	gameBoard := NewGameBoard()
 	middleColumn := BoardWidth / 2
 
@@ -17,7 +17,7 @@ func TestPlayerChoosesAMoveOnEmptyBoard(t *testing.T) {
 }
 
 func TestPlayerChoosesAMoveOnFullMiddleRow(t *testing.T) {
-	player := NewPlayerStrategyFirstAvailableMove(0)
+	player := NewPlayerStrategyFirstAvailableMove(1)
 
 	thisBoard := [BoardHeight][BoardWidth]int{
 		{-1, -1, -1, 0, -1, -1, -1},
@@ -39,7 +39,7 @@ func TestPlayerChoosesAMoveOnFullMiddleRow(t *testing.T) {
 }
 
 func TestPlayerChoosesAMoveOnFullBoard(t *testing.T) {
-	player := NewPlayerStrategyFirstAvailableMove(0)
+	player := NewPlayerStrategyFirstAvailableMove(1)
 
 	thisBoard := [BoardHeight][BoardWidth]int{
 		{1, 0, 1, 0, 1, 0, 1},

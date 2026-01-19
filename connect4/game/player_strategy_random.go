@@ -4,14 +4,16 @@ import (
 	"math/rand"
 )
 
+func init() {
+	Register("random", NewPlayerStrategyRandom)
+}
+
 type PlayerStrategyRandom struct {
 	playerValue int
 }
 
-func NewPlayerStrategyRandom(playerValue int) *PlayerStrategyRandom {
-	return &PlayerStrategyRandom{
-		playerValue: playerValue,
-	}
+func NewPlayerStrategyRandom(playerValue int) PlayerStrategy {
+	return &PlayerStrategyRandom{playerValue: playerValue}
 }
 
 func (p PlayerStrategyRandom) GetName() string {

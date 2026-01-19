@@ -16,15 +16,16 @@ func TestRandomPlayerChoosesAMoveOnEmptyBoard(t *testing.T) {
 }
 
 func TestRandomPlayerChoosesAMoveOnFullBoard(t *testing.T) {
-	player := NewPlayerStrategyRandom(1)
+	me := 11
+	player := NewPlayerStrategyRandom(me)
 
 	thisBoard := [BoardHeight][BoardWidth]int{
-		{1, 2, 1, 2, 1, 2, 1},
-		{1, 2, 1, 2, 1, 2, 1},
-		{2, 1, 2, 1, 2, 1, 2},
-		{2, 1, 2, 1, 2, 1, 2},
-		{1, 2, 1, 2, 1, 2, 1},
-		{1, 2, 1, 2, 1, 2, 1},
+		{me, 22, me, 22, me, 22, me},
+		{me, 22, me, 22, me, 22, me},
+		{22, me, 22, me, 22, me, 22},
+		{22, me, 22, me, 22, me, 22},
+		{me, 22, me, 22, me, 22, me},
+		{me, 22, me, 22, me, 22, me},
 	}
 	gameBoard := NewInProgressGameBoard(thisBoard)
 

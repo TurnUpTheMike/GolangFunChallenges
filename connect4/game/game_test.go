@@ -46,7 +46,7 @@ func TestGetPlayerStrategyByValueNotFound(t *testing.T) {
 }
 
 func TestGetPlayerStrategyWithOptionString(t *testing.T) {
-	playerStrategy := GetPlayerStrategy("firstavailable", 2)
+	playerStrategy := CreatePlayerStrategy("firstavailable", 2)
 
 	if playerStrategy.GetName() != "First Available Move Strategy" {
 		t.Errorf(`TestGetPlayerStrategyWithOptionString expected to create a "First Available Move Strategy", but created %v instead`, playerStrategy.GetName())
@@ -58,7 +58,7 @@ func TestGetPlayerStrategyWithOptionString(t *testing.T) {
 }
 
 func TestGetPlayerStrategyWithNotFoundOption(t *testing.T) {
-	playerStrategy := GetPlayerStrategy("notfound", 2)
+	playerStrategy := CreatePlayerStrategy("notfound", 2)
 
 	if playerStrategy.GetName() != "Random Move Strategy" {
 		t.Errorf(`TestGetPlayerStrategyWithNotFoundOption expected to default to "Random Move Strategy", but created %v instead`, playerStrategy.GetName())

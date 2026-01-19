@@ -8,9 +8,10 @@ import (
 
 func main() {
 	fmt.Println("Let's Play Connect 4")
+	playerRegistryHelp := game.GetHelpMessageOfPlayerRegistry()
 
-	argPlayer1 := flag.String("player1", "random", "The Player Strategy key for Player 1")
-	argPlayer2 := flag.String("player2", "random", "The Player Strategy key for Player 2")
+	argPlayer1 := flag.String("player1", "random", playerRegistryHelp)
+	argPlayer2 := flag.String("player2", "random", playerRegistryHelp)
 	argPrintBoardCadence := flag.Int("printboard", 5, "Print the board to the display every n turns")
 	flag.Parse()
 
@@ -22,5 +23,4 @@ func main() {
 	_, message := game.PlayConnect4(config)
 
 	fmt.Println(message)
-	fmt.Println("El Fin")
 }
