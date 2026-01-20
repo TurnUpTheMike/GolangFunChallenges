@@ -145,18 +145,19 @@ func TestIsPlayersSpaceOnEmptyBoard(t *testing.T) {
 }
 
 func TestIsPlayersSpaceOnPartiallyPlayedBoard(t *testing.T) {
+	me := 11
 	thisBoard := [BoardHeight][BoardWidth]int{
 		{-1, -1, -1, -1, -1, -1, -1},
 		{-1, -1, -1, -1, -1, -1, -1},
-		{1, -1, -1, -1, -1, -1, -1},
-		{1, -1, -1, -1, -1, -1, -1},
-		{2, -1, -1, -1, -1, -1, -1},
-		{2, -1, -1, -1, -1, -1, -1},
+		{me, -1, -1, -1, -1, -1, -1},
+		{me, -1, -1, -1, -1, -1, -1},
+		{22, -1, -1, -1, -1, -1, -1},
+		{22, -1, -1, -1, -1, -1, -1},
 	}
 
 	gameBoard := NewInProgressGameBoard(thisBoard)
 
-	player := NewPlayerStrategyFirstAvailableMove(1)
+	player := NewPlayerStrategyFirstAvailableMove(me)
 
 	spaceOwnership := gameBoard.IsPlayersSpace(player, 0, 2)
 	if spaceOwnership != true {

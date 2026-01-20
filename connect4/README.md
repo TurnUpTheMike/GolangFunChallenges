@@ -4,11 +4,18 @@ Here's how to play
 
 Create a pull request to this repo that contains
 - A new file called `player_strategy_<strategy_name>.go`
-- Modify `game.go` func GetPlayerStrategy to call your code's constructor and return a PlayerStrategy
+- Your code in `player_strategy_<strategy_name>.go` implements the functions of the Interfrace PlayerStrategy found in `player_strategy.go`.
 
-Your code in `player_strategy_<strategy_name>.go` should implement the functions of the Interfrace PlayerStrategy found in `player_strategy.go`.
+- Your code contains a factory Function <br/> 
+`NewPlayerStrategy<strategy_name>(int playerValue) PlayerStrategy` <br/>
+that returns your implementation of PlayerStrategy.
 
-Your code should also contain a function NewPlayerStrategy<strategy_name> that returns your implementation of PlayerStrategy.
+- Your code registers your PlayerStrategy with an optionValue like
+```
+func init() {
+	Register("random", NewPlayerStrategyRandom)
+}
+```
 
 # Example Usage
 

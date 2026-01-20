@@ -1,10 +1,14 @@
 package game
 
+func init() {
+	Register("blocker", NewPlayerStrategyBlocker)
+}
+
 type PlayerStrategyBlocker struct {
 	playerValue int
 }
 
-func NewPlayerStrategyBlocker(playerValue int) *PlayerStrategyBlocker {
+func NewPlayerStrategyBlocker(playerValue int) PlayerStrategy {
 	return &PlayerStrategyBlocker{
 		playerValue: playerValue,
 	}

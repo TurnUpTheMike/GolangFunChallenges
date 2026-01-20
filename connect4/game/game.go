@@ -3,7 +3,6 @@ package game
 import (
 	"errors"
 	"fmt"
-	"strings"
 )
 
 const WinningLength int = 4
@@ -34,9 +33,11 @@ func PlayConnect4(config GameConfig) (int, string) {
 	gameBoard := NewGameBoard()
 	playerValues := [NumPlayers]int{1, 2}
 
-	player1 := GetPlayerStrategy(config.Player1, playerValues[0])
-	player2 := GetPlayerStrategy(config.Player2, playerValues[1])
+	player1 := CreatePlayerStrategy(config.Player1, playerValues[0])
+	player2 := CreatePlayerStrategy(config.Player2, playerValues[1])
 	players := [NumPlayers]PlayerStrategy{player1, player2}
+
+	fmt.Println(`Player1: `, player1.GetName(), ` and Player2: `, player2.GetName())
 
 	winner := NoPlayer
 
@@ -84,16 +85,12 @@ func GetPlayerStrategyByValue(players [NumPlayers]PlayerStrategy, playerValue in
 	return nil
 }
 
-func GetPlayerStrategy(option string, playerValue int) PlayerStrategy {
-	switch strings.ToLower(option) {
-	case "random":
-		return NewPlayerStrategyRandom(playerValue)
-	case "firstavailable":
-		return NewPlayerStrategyFirstAvailableMove(playerValue)
-	case "blocker":
-		return NewPlayerStrategyBlocker(playerValue)
+func CreatePlayerStrategy(option string, playerValue int) PlayerStrategy {
+	player := GetRegisteredPlayerStrategy(option, playerValue)
+
+	if player == nil {
+		player = GetRegisteredPlayerStrategy("random", playerValue)
 	}
 
-	// default
-	return NewPlayerStrategyRandom(playerValue)
+	return player
 }
